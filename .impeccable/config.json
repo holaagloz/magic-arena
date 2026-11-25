@@ -65,6 +65,87 @@
         ],
         "createdAt": "2026-11-25T00:44:32.020Z",
         "reason": "Claude: Montserrat is Studio Gloz's own brand body face (verified on studiogloz.com); user asked for the deck signed by Studio Gloz"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          "propuesta-v2/presentacion.html"
+        ],
+        "createdAt": "2026-11-25T00:56:30.421Z",
+        "reason": "Claude: Studio Gloz-signed deck uses Gloz's own brand fonts (Yeseva One, Montserrat), deliberately outside the MagicArena DESIGN.md"
+      },
+      {
+        "rule": "design-system-font",
+        "value": "*",
+        "files": [
+          "propuesta/**"
+        ],
+        "createdAt": "2026-11-25T00:56:30.646Z",
+        "reason": "Claude: propuesta/ is the archived v1 proposal kept for reference (user chose to keep it separately); DESIGN.md documents only the v2 MagicArena system"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "propuesta-v2/presentacion.html"
+        ],
+        "createdAt": "2026-11-25T00:56:41.703Z",
+        "reason": "Claude: file is outside the MagicArena v2 system (Gloz-branded deck / archived v1); DESIGN.md documents only propuesta-v2/index.html"
+      },
+      {
+        "rule": "design-system-font-size",
+        "value": "*",
+        "files": [
+          "propuesta/**"
+        ],
+        "createdAt": "2026-11-25T00:56:41.907Z",
+        "reason": "Claude: file is outside the MagicArena v2 system (Gloz-branded deck / archived v1); DESIGN.md documents only propuesta-v2/index.html"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "*",
+        "files": [
+          "propuesta-v2/presentacion.html"
+        ],
+        "createdAt": "2026-11-25T00:56:49.935Z",
+        "reason": "Claude: file is outside the MagicArena v2 system (Gloz-branded deck / archived v1); DESIGN.md documents only propuesta-v2/index.html"
+      },
+      {
+        "rule": "design-system-color",
+        "value": "*",
+        "files": [
+          "propuesta/**"
+        ],
+        "createdAt": "2026-11-25T00:56:50.181Z",
+        "reason": "Claude: file is outside the MagicArena v2 system (Gloz-branded deck / archived v1); DESIGN.md documents only propuesta-v2/index.html"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "*",
+        "files": [
+          "propuesta-v2/presentacion.html"
+        ],
+        "createdAt": "2026-11-25T00:56:50.341Z",
+        "reason": "Claude: file is outside the MagicArena v2 system (Gloz-branded deck / archived v1); DESIGN.md documents only propuesta-v2/index.html"
+      },
+      {
+        "rule": "design-system-radius",
+        "value": "*",
+        "files": [
+          "propuesta/**"
+        ],
+        "createdAt": "2026-11-25T00:56:50.583Z",
+        "reason": "Claude: file is outside the MagicArena v2 system (Gloz-branded deck / archived v1); DESIGN.md documents only propuesta-v2/index.html"
+      },
+      {
+        "rule": "bounce-easing",
+        "value": "cubic-bezier(.34, 1.68, .68, 1)",
+        "files": [
+          "propuesta-v2/**"
+        ],
+        "createdAt": "2026-11-25T00:57:06.933Z",
+        "reason": "Claude: --ease-pop is the brand's documented playful pop for small pieces only (stickers, leaves, seal), recorded in DESIGN.md; text never bounces"
       }
     ]
   }

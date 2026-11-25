@@ -13,7 +13,7 @@ Mode: Persuade. Visitor: parent on a phone deciding an outing or birthday. Actio
 
 THESIS: The page is a rainbow you walk under. The logo's arcs grow into the architecture: arched photo windows, arc-topped section edges, thick color bands. Refuses the category default of a cream page with a headline, two buttons and three equal icon cards.
 
-OWN-WORLD: Deep teal field (#1E5A68) owning the hero; bands of coral (#FF6F59), sunflower (#FFC23C), sky (#9ED4E4) and sand (#F4DCBC); logo leaves and twin rings as floating stickers; Gluten (gooey, sand-like) for display, Nunito for text; arch windows, pill buttons in coral with dark ink.
+OWN-WORLD: Deep teal field (#1E5A68) owning the hero; bands of coral (#FF7B63), sunflower (#FFC23C), sky (#9ED4E4) and sand (#F4DCBC); logo leaves and twin rings as floating stickers; Gluten (gooey, sand-like) for display, Nunito for text; arch windows, pill buttons in coral with dark ink.
 
 STORY: Visitor sees the real child in real sand under a rainbow, reads one promise, taps Reservá tu visita; scrolls through what they will find, who runs it, parties, café, shop, community, hours.
 

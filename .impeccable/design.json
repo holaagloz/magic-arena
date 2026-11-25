@@ -1,0 +1,175 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-24T19:00:00-06:00",
+  "title": "Design System: MagicArena",
+  "extensions": {
+    "colorMeta": {
+      "teal": { "role": "primary", "displayName": "Rainbow Teal", "canonical": "#1E5A68", "cssVar": "--teal", "tonalRamp": ["#192E33", "#27535D", "#327A8B", "#38A3BD", "#62B7CA", "#92C7D3", "#C4DDE3", "#EFF4F6"] },
+      "teal-deep": { "role": "primary", "displayName": "Night Teal", "canonical": "#163F49", "cssVar": "--teal-deep", "tonalRamp": ["#1A2E33", "#28525C", "#33798A", "#3AA1BB", "#64B5C9", "#92C6D3", "#C5DDE2", "#EFF4F6"] },
+      "coral": { "role": "secondary", "displayName": "Reserve Coral", "canonical": "#FF7B63", "cssVar": "--coral (aliased as --cta)", "tonalRamp": ["#3E160F", "#732112", "#AF260D", "#F22803", "#F55538", "#EE8977", "#EFC1B8", "#F9EEEC"] },
+      "coral-hover": { "role": "secondary", "displayName": "Coral Glow", "canonical": "#FF957F", "cssVar": "--coral-hover" },
+      "sunflower": { "role": "tertiary", "displayName": "Sunflower", "canonical": "#FFC23C", "cssVar": "--sun", "tonalRamp": ["#3E2F0F", "#735512", "#AF7D0D", "#F2A703", "#F5BA38", "#EEC977", "#EFDEB8", "#F9F5EC"] },
+      "sky": { "role": "tertiary", "displayName": "Pool Sky", "canonical": "#9ED4E4", "cssVar": "--sky", "tonalRamp": ["#192D34", "#27515E", "#31778C", "#379FBE", "#61B3CC", "#91C5D4", "#C4DCE3", "#EFF4F6"] },
+      "sand": { "role": "tertiary", "displayName": "Warm Sand", "canonical": "#F4DCBC", "cssVar": "--sand", "tonalRamp": ["#372915", "#65471F", "#986724", "#D08724", "#DAA053", "#DDB988", "#E7D6C0", "#F7F3EE"] },
+      "ink": { "role": "neutral", "displayName": "Arena Ink", "canonical": "#16323A", "cssVar": "--ink (aliased as --cta-ink)", "tonalRamp": ["#1C2C31", "#2C4E58", "#3A7383", "#4598B0", "#6CAEC1", "#98C1CD", "#C7DBE0", "#EFF4F5"] },
+      "muted": { "role": "neutral", "displayName": "Slate Muted", "canonical": "#4B5F65", "cssVar": "--muted", "tonalRamp": ["#23282A", "#3B464A", "#52656A", "#69848C", "#899EA4", "#AAB7BB", "#D0D6D8", "#F1F3F3"] },
+      "mist": { "role": "neutral", "displayName": "Mist", "canonical": "#F3FAFC", "cssVar": "--bg" },
+      "surface": { "role": "neutral", "displayName": "Surface White", "canonical": "#FFFFFF", "cssVar": "--surface" },
+      "sticker-cream": { "role": "neutral", "displayName": "Sticker Cream", "canonical": "#FFFDF8", "cssVar": "none (hardcoded literal in 10 places)" },
+      "on-teal": { "role": "neutral", "displayName": "On Teal", "canonical": "#FFFFFF", "cssVar": "--on-teal" },
+      "on-teal-soft": { "role": "neutral", "displayName": "Soft Teal Mist", "canonical": "#C2E4EE", "cssVar": "--on-teal-soft" },
+      "on-sun": { "role": "neutral", "displayName": "Sun Ink", "canonical": "#3B3418", "cssVar": "--on-sun" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The single closing question above the final CTA." },
+      "hero": { "displayName": "Hero", "purpose": "Hero headline in 2-3 masked lines, one word in Sunflower." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles, balanced wrap." },
+      "title": { "displayName": "Title", "purpose": "Card and panel titles, 1.4-1.7rem." },
+      "quote": { "displayName": "Quote", "purpose": "Founders' line in Rainbow Teal, max 24ch." },
+      "numeral": { "displayName": "Numeral", "purpose": "Prices on pass cards and the price sticker, tabular figures." },
+      "lede": { "displayName": "Lede", "purpose": "Section intros in Slate Muted, max 46ch." },
+      "body": { "displayName": "Body", "purpose": "All reading text." },
+      "label": { "displayName": "Label", "purpose": "Buttons, text links, FAQ questions." }
+    },
+    "shadows": [
+      { "name": "cta-drop", "value": "0 14px 30px -14px rgba(10,30,36,.55)", "purpose": "Primary button; removed in nav and Café box." },
+      { "name": "tab-drop", "value": "0 26px 40px -26px rgba(22,50,58,.55)", "purpose": "Hours tab hanging over the hero edge." },
+      { "name": "sticker-ring", "value": "0 0 0 8px #FFFDF8, 0 26px 40px -22px rgba(22,50,58,.6)", "purpose": "Price sticker: cream die-cut edge plus drop." },
+      { "name": "inset-drop", "value": "0 18px 34px -18px rgba(0,0,0,.5)", "purpose": "Round photo inset on the hero arch." },
+      { "name": "lift", "value": "0 26px 40px -28px rgba(22,50,58,.6)", "purpose": "Product card on hover, with a 6px rise." },
+      { "name": "focus-ring", "value": "outline: 3px solid #FFC23C; outline-offset: 3px", "purpose": "Global :focus-visible." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(.25,1,.5,1)", "purpose": "Default entrance and hover easing. JS pair: M.ease = power3.out." },
+      { "name": "ease-io", "value": "cubic-bezier(.76,0,.24,1)", "purpose": "Clip-path reveals (photo wipes, menu panel). JS pair: M.easeIO = power3.inOut." },
+      { "name": "ease-pop", "value": "cubic-bezier(.34,1.68,.68,1)", "purpose": "Overshoot for stickers, icon tilt, FAQ toggle, word splits. JS pair: M.pop = back.out(2.2)." },
+      { "name": "dur", "value": "1s", "purpose": "Base entrance duration. JS pair: M.dur = 1.0." },
+      { "name": "dist", "value": "56px", "purpose": "Base entrance travel. JS pair: M.dist = 56." },
+      { "name": "stagger", "value": "0.085s", "purpose": "Base stagger between siblings (JS only: M.stagger)." },
+      { "name": "t-hover", "value": ".45s", "purpose": "Hover color, tilt and sticker transitions." },
+      { "name": "seal-spin", "value": "18s linear infinite (22s on the community seal)", "purpose": "Rotating seals." },
+      { "name": "float", "value": "7s ease-in-out infinite, 5px", "purpose": "Idle float for arrived ornaments." },
+      { "name": "reduced-motion", "value": "durations .001ms", "purpose": "All animation and transition collapses under prefers-reduced-motion; content visible without JS." }
+    ],
+    "breakpoints": [
+      { "name": "lg", "value": "1080px" },
+      { "name": "md", "value": "900px" },
+      { "name": "sm", "value": "560px" },
+      { "name": "xs", "value": "520px" },
+      { "name": "xxs", "value": "420px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Coral pill with an ink icon disc; every reserve action.",
+      "html": "<a class=\"ds-btn\" href=\"#\">Reservá tu visita<span class=\"ds-btn__ico\" aria-hidden=\"true\"><svg viewBox=\"0 0 24 24\"><path fill=\"currentColor\" d=\"M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z\"/></svg></span></a>",
+      "css": ".ds-btn{display:inline-flex;align-items:center;gap:12px;min-height:56px;padding:0 10px 0 28px;border-radius:999px;background:var(--coral,#FF7B63);color:var(--ink,#16323A);font:800 1.06rem/1 var(--font-body,Nunito,system-ui,sans-serif);text-decoration:none;box-shadow:0 14px 30px -14px rgba(10,30,36,.55);transition:background-color .45s cubic-bezier(.25,1,.5,1),scale .18s cubic-bezier(.25,1,.5,1)} .ds-btn__ico{width:40px;height:40px;border-radius:50%;background:var(--ink,#16323A);color:var(--coral,#FF7B63);display:grid;place-items:center;transition:rotate .45s cubic-bezier(.34,1.68,.68,1)} .ds-btn__ico svg{width:20px;height:20px} .ds-btn:hover{background:var(--coral-hover,#FF957F)} .ds-btn:hover .ds-btn__ico{rotate:-12deg} .ds-btn:active{scale:.96} .ds-btn:focus-visible{outline:3px solid var(--sun,#FFC23C);outline-offset:3px}"
+    },
+    {
+      "name": "Text Link",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Bold underlined link; underline turns Sunflower on hover.",
+      "html": "<a class=\"ds-enlace\" href=\"#\">Cómo llegar</a>",
+      "css": ".ds-enlace{font:800 1.0625rem/1.6 var(--font-body,Nunito,system-ui,sans-serif);color:var(--ink,#16323A);text-decoration:none;border-bottom:2.5px solid currentColor;padding-bottom:2px;transition:border-color .45s cubic-bezier(.25,1,.5,1)} .ds-enlace:hover{border-color:var(--sun,#FFC23C)} .ds-enlace:focus-visible{outline:3px solid var(--sun,#FFC23C);outline-offset:3px;border-radius:12px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Nav inside the teal hero: cream logo pill, white pill links, coral CTA.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav__logo\" href=\"#\">MagicArena</a><ul class=\"ds-nav__links\"><li><a href=\"#\">Experiencias</a></li><li><a href=\"#\">Entradas</a></li><li><a href=\"#\">Fiestas</a></li></ul><a class=\"ds-nav__cta\" href=\"#\">Reservá</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 24px;background:var(--teal,#1E5A68);font-family:var(--font-body,Nunito,system-ui,sans-serif)} .ds-nav__logo{background:#FFFDF8;border-radius:999px;padding:8px 18px 8px 12px;color:var(--teal,#1E5A68);font:700 1.2rem/1 var(--font-display,Gluten,sans-serif);text-decoration:none} .ds-nav__links{display:flex;gap:4px;list-style:none;margin:0;padding:0} .ds-nav__links a{display:block;color:#fff;text-decoration:none;font-weight:700;padding:10px 14px;border-radius:999px;transition:background-color .45s cubic-bezier(.25,1,.5,1)} .ds-nav__links a:hover{background:rgba(255,255,255,.12)} .ds-nav__links a:focus-visible,.ds-nav__cta:focus-visible{outline:3px solid var(--sun,#FFC23C);outline-offset:3px} .ds-nav__cta{display:inline-flex;align-items:center;min-height:46px;padding:0 22px;border-radius:999px;background:var(--coral,#FF7B63);color:var(--ink,#16323A);font-weight:800;text-decoration:none;transition:background-color .45s cubic-bezier(.25,1,.5,1)} .ds-nav__cta:hover{background:var(--coral-hover,#FF957F)}"
+    },
+    {
+      "name": "Offer Chip",
+      "kind": "chip",
+      "refersTo": "chip-offer",
+      "description": "Ink pill with Sunflower text for time-limited promotions.",
+      "html": "<p class=\"ds-oferta\">Black Friday · −20% hasta el 29 de noviembre</p>",
+      "css": ".ds-oferta{display:inline-flex;gap:10px;align-items:center;margin:0;background:var(--ink,#16323A);color:var(--sun,#FFC23C);border-radius:999px;padding:8px 16px;font:800 1rem/1.4 var(--font-body,Nunito,system-ui,sans-serif)}"
+    },
+    {
+      "name": "Experience Card",
+      "kind": "card",
+      "refersTo": "card-experience",
+      "description": "Solid color block, 40px radius, arch photo window.",
+      "html": "<article class=\"ds-exp\"><div class=\"ds-exp__ventana\"></div><h3>Arena sensorial</h3><p>Un arenero interior, limpio y tibio, para explorar con las manos.</p></article>",
+      "css": ".ds-exp{max-width:280px;background:var(--sand,#F4DCBC);color:var(--ink,#16323A);border-radius:40px;padding:16px 16px 26px;font:500 .98rem/1.6 var(--font-body,Nunito,system-ui,sans-serif)} .ds-exp__ventana{aspect-ratio:4/4.4;border-radius:999px 999px 18px 18px;background:var(--sky,#9ED4E4);margin-bottom:20px;transition:scale .9s cubic-bezier(.25,1,.5,1)} .ds-exp:hover .ds-exp__ventana{scale:1.03} .ds-exp h3{font:700 1.65rem/1.04 var(--font-display,Gluten,sans-serif);margin:0 8px 8px} .ds-exp p{margin:0 8px}"
+    },
+    {
+      "name": "Price Sticker",
+      "kind": "custom",
+      "refersTo": "sticker-price",
+      "description": "Round, tilted sky sticker with cream die-cut ring; springs on hover.",
+      "html": "<a class=\"ds-pegatina\" href=\"#\"><span class=\"ds-pegatina__dato\">desde<b>₡6.000</b></span><span class=\"ds-pegatina__txt\">pase de 2 horas</span></a>",
+      "css": ".ds-pegatina{width:200px;aspect-ratio:1;border-radius:50%;background:var(--sky,#9ED4E4);color:var(--ink,#16323A);text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;rotate:-6deg;font-family:var(--font-body,Nunito,system-ui,sans-serif);box-shadow:0 0 0 8px #FFFDF8,0 26px 40px -22px rgba(22,50,58,.6);transition:rotate .45s cubic-bezier(.34,1.68,.68,1),scale .45s cubic-bezier(.34,1.68,.68,1)} .ds-pegatina:hover{rotate:4deg;scale:1.04} .ds-pegatina:focus-visible{outline:3px solid var(--sun,#FFC23C);outline-offset:12px} .ds-pegatina__dato{font-weight:700;font-size:1rem;line-height:1.3} .ds-pegatina__dato b{display:block;font:700 2.4rem/1.05 var(--font-display,Gluten,sans-serif);font-variant-numeric:tabular-nums} .ds-pegatina__txt{font-weight:800;font-size:.95rem}"
+    },
+    {
+      "name": "FAQ Item",
+      "kind": "custom",
+      "refersTo": "faq-item",
+      "description": "White disclosure with a round toggle that turns Sunflower and rotates into a cross.",
+      "html": "<details class=\"ds-faq\"><summary>¿Tengo que reservar antes de ir?<i aria-hidden=\"true\"></i></summary><p>Entre semana podés llegar directo.</p></details>",
+      "css": ".ds-faq{background:var(--surface,#fff);border-radius:18px;color:var(--ink,#16323A);font-family:var(--font-body,Nunito,system-ui,sans-serif);max-width:520px} .ds-faq summary{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 22px;cursor:pointer;list-style:none;font-weight:800;font-size:1.08rem} .ds-faq summary::-webkit-details-marker{display:none} .ds-faq summary:focus-visible{outline:3px solid var(--sun,#FFC23C);outline-offset:3px;border-radius:12px} .ds-faq i{width:30px;height:30px;border-radius:50%;background:var(--bg,#F3FAFC);flex:none;position:relative;transition:background-color .3s cubic-bezier(.25,1,.5,1),rotate .4s cubic-bezier(.34,1.68,.68,1)} .ds-faq i::before,.ds-faq i::after{content:\"\";position:absolute;left:50%;top:50%;width:12px;height:2.5px;border-radius:2px;background:var(--ink,#16323A);translate:-50% -50%} .ds-faq i::after{rotate:90deg} .ds-faq[open] i{background:var(--sun,#FFC23C);rotate:45deg} .ds-faq p{margin:0;padding:0 22px 22px;color:var(--muted,#4B5F65)}"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "White card, 4:5 photo with convex bottom, lifts on hover.",
+      "html": "<a class=\"ds-producto\" href=\"#\"><div class=\"ds-producto__img\"></div><div class=\"ds-producto__txt\"><h3>Pizarra Mágica LCD</h3><p class=\"ds-precio\"><b>₡7.200</b><s>₡9.000</s></p></div></a>",
+      "css": ".ds-producto{display:flex;flex-direction:column;width:220px;background:var(--surface,#fff);border-radius:28px;overflow:hidden;text-decoration:none;color:var(--ink,#16323A);font-family:var(--font-body,Nunito,system-ui,sans-serif);transition:translate .5s cubic-bezier(.25,1,.5,1),box-shadow .5s cubic-bezier(.25,1,.5,1)} .ds-producto:hover{translate:0 -6px;box-shadow:0 26px 40px -28px rgba(22,50,58,.6)} .ds-producto:focus-visible{outline:3px solid var(--sun,#FFC23C);outline-offset:3px} .ds-producto__img{aspect-ratio:4/5;border-radius:0 0 50% 50% / 0 0 14% 14%;background:var(--sand,#F4DCBC)} .ds-producto__txt{padding:16px 18px 20px} .ds-producto h3{margin:0;font:800 1.04rem/1.3 var(--font-body,Nunito,system-ui,sans-serif)} .ds-precio{display:flex;gap:10px;align-items:baseline;margin:8px 0 0;font-variant-numeric:tabular-nums} .ds-precio b{font-size:1.15rem;color:var(--teal,#1E5A68)} .ds-precio s{color:var(--muted,#4B5F65);font-size:.92rem}"
+    },
+    {
+      "name": "Rainbow Arch",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature figure: four concentric round-capped bands, coral outermost, around an arch photo window.",
+      "html": "<div class=\"ds-arco\"><svg viewBox=\"0 0 600 600\" aria-hidden=\"true\"><path stroke=\"#FF7B63\" d=\"M32,600 L32,340 A268,268 0 0 1 568,340 L568,600\"/><path stroke=\"#FFC23C\" d=\"M64,600 L64,340 A236,236 0 0 1 536,340 L536,600\"/><path stroke=\"#9ED4E4\" d=\"M96,600 L96,340 A204,204 0 0 1 504,340 L504,600\"/><path stroke=\"#F4DCBC\" d=\"M128,600 L128,340 A172,172 0 0 1 472,340 L472,600\"/></svg><div class=\"ds-arco__foto\"></div></div>",
+      "css": ".ds-arco{position:relative;width:320px;aspect-ratio:1;background:var(--teal,#1E5A68)} .ds-arco svg{position:absolute;inset:0;width:100%;height:100%} .ds-arco path{fill:none;stroke-width:28;stroke-linecap:round} .ds-arco__foto{position:absolute;left:26.667%;top:33.333%;width:46.667%;height:66.667%;border-radius:999px 999px 0 0;background:var(--sand,#F4DCBC)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Rainbow You Walk Under",
+    "overview": "The logo's monoline rainbow is not a mark placed on the page; it is the page's architecture. Its arcs grow into thick concentric color bands around the hero photo, into arch-topped photo windows, into curved section edges that rise like the top of a rainbow, and into the closing arc the visitor finally passes beneath. Its terracotta leaves and twin rings return as small line drawings: list bullets, floating stickers, the flames of a party-cake candle. Everything new is built from pieces the logo already owns.\n\nA deep teal field holds the hero and the anchoring dark sections, and color arrives in solid blocks: sunflower, sky and sand panels, one coral voice reserved for \"reserve\". Type is gooey and hand-made at display sizes (Gluten), plain and warm at reading sizes (Nunito). Density is generous: sections breathe on an 80 to 140px vertical rhythm, cards sit in staggered rows rather than equal grids, and motion is springy but brief, so the page reads as joyful without being loud, matching a place that promises stimulation without overstimulation.",
+    "keyCharacteristics": [
+      "Teal field hero and dark anchors; light sections on a cool mist page.",
+      "Concentric four-band rainbow (coral, sunflower, sky, sand, outside in) as the signature figure.",
+      "Arch windows for every photo; arc-topped section edges for every color change.",
+      "Pill and large-radius forms only; no square corners anywhere.",
+      "Coral is the action color and is never body text.",
+      "Logo leaves and twin rings as the only ornament and the only bullet glyph."
+    ],
+    "rules": [
+      { "name": "The Coral Means Reserve Rule", "body": "Coral fills the action and the rainbow figure, nothing else. It never becomes a section ground, a card fill, or text on a light ground (it reaches only 2.41:1 on Mist).", "section": "colors" },
+      { "name": "The Outer-Coral Rule", "body": "A full rainbow reads coral, sunflower, sky, sand from outside to inside, every time (hero arch, mobile menu, closing arc). A three-band arch on a sand ground drops coral and uses teal, sky, sunflower.", "section": "colors" },
+      { "name": "The Logo Stays in the Logo Rule", "body": "The logo's own colors (its muted teal, pale sky, ochre, terracotta, script blue) live only inside the raster logo. They are not UI tokens; the interface palette is the vivid set above.", "section": "colors" },
+      { "name": "The Gooey-Only-Big Rule", "body": "Gluten appears only at 1.4rem and up (headings, prices, quote, menu links). Small headings that must stay legible, such as product names and footer column titles, switch to Nunito 800.", "section": "typography" },
+      { "name": "The No-Eyebrow Rule", "body": "Headings stand alone. No uppercase, letter-spaced kicker sits above a title; the only spaced capitals in the system are the text running around a rotating seal.", "section": "typography" },
+      { "name": "The Stickers Cast Shadows Rule", "body": "Only objects that sit on the page cast a shadow; panels that are the page stay flat.", "section": "elevation" },
+      { "name": "The Arch Rule", "body": "A photo never sits in a square frame; it gets an arch window or a circle.", "section": "shapes" }
+    ],
+    "dos": [
+      "Do let Rainbow Teal own the first viewport and return as the dark anchor for community, visit and footer.",
+      "Do draw a full rainbow coral, sunflower, sky, sand from outside in, with 28px round-capped strokes.",
+      "Do put every photo in an arch window or a circle, and change section color through an arc edge filled with the incoming color.",
+      "Do set Arena Ink on coral, sunflower, sky and sand, and white or Soft Teal Mist on teal.",
+      "Do use the logo's twin rings as list bullets and its leaf as the only decorative glyph, drawn as inline SVG monoline.",
+      "Do keep radii at 18, 28, 40px or full pill.",
+      "Do keep shadows soft, ink-tinted and negatively spread, and only under objects that sit on the page."
+    ],
+    "donts": [
+      "Don't use coral as text or as a section ground; it reaches only 2.41:1 on Mist.",
+      "Don't use the logo's raster colors as interface colors.",
+      "Don't put an uppercase, letter-spaced kicker or eyebrow above a heading; the rotating seal is the only spaced-capitals text.",
+      "Don't set Gluten below 1.4rem; switch to Nunito 800.",
+      "Don't line cards up as three equal icon tiles; stagger them or vary their form.",
+      "Don't use square-cornered photos, cards or buttons.",
+      "Don't use hard offset shadows or emoji and font-glyph icons."
+    ]
+  }
+}

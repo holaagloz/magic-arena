@@ -198,7 +198,7 @@ html.lenis,html.lenis body{height:auto}
 .valores li{display:grid;grid-template-columns:22px 1fr;gap:14px}
 .valores li svg{width:11px;height:24px;margin-top:4px}
 .valores b{display:block;font-weight:800;font-size:1.08rem}
-.valores span{color:#4A4234}
+.valores span{color:var(--ink)}
 /* ===== FIN Nosotros ===== */
 
 /* ===== INICIO Fiestas ===== */
@@ -206,7 +206,7 @@ html.lenis,html.lenis body{height:auto}
 .fiestas__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,88px);align-items:center}
 .fiestas .intro{color:var(--on-sun)}
 .paquetes{list-style:none;display:grid;gap:12px;margin:34px 0}
-.paquete{background:#FFF7E3;border-radius:var(--r-lg);padding:20px 22px;display:grid;grid-template-columns:1fr auto;gap:4px 18px;align-items:baseline}
+.paquete{background:#FFFDF8;border-radius:var(--r-lg);padding:20px 22px;display:grid;grid-template-columns:1fr auto;gap:4px 18px;align-items:baseline}
 .paquete b{font-family:var(--font-display);font-weight:700;font-size:1.45rem}
 .paquete .precio{font-weight:800;font-variant-numeric:tabular-nums;font-size:1.08rem;white-space:nowrap}
 .paquete span{grid-column:1/-1;color:var(--on-sun);font-size:.98rem}
