@@ -1,0 +1,71 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "propuesta/sitio/index.html"
+        ],
+        "createdAt": "2026-11-25T00:03:38.298Z",
+        "reason": "Claude: flagged wrappers are full-bleed bands/cards whose padding lives on the section or inner .wrap/.fact (24-128px); verified visually in 1440 and 390 px screenshots"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "propuesta/presentacion.html"
+        ],
+        "createdAt": "2026-11-25T00:03:38.458Z",
+        "reason": "Claude: sections use 72-120px vertical padding with a hairline border-top divider; text is not flush, verified in full-page screenshot"
+      },
+      {
+        "rule": "cream-palette",
+        "value": "*",
+        "files": [
+          "propuesta/**"
+        ],
+        "createdAt": "2026-11-25T00:03:48.332Z",
+        "reason": "Claude: #FFFAF5 is the background color of the client's own logo file (sampled #FFFAF6), deliberate brand derivation"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "propuesta-v2/direccion-de-arte.html"
+        ],
+        "createdAt": "2026-11-25T00:20:46.270Z",
+        "reason": "Claude: hero content sits inside .nav/.portada__grid gutters; the flush child is the full-bleed decorative arc edge SVG; .el__dibujo tiles are intentional full-bleed demo frames. Verified in captures"
+      },
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          "propuesta-v2/**"
+        ],
+        "createdAt": "2026-11-25T00:34:41.611Z",
+        "reason": "Claude: full-bleed colored sections whose content lives in .wrap gutters (20-64px) and section padding (80-140px); the flush children are decorative arc-edge SVGs. Verified in 375/1440 captures"
+      },
+      {
+        "rule": "shape-assembled-illustration",
+        "value": "*",
+        "files": [
+          "propuesta-v2/index.html"
+        ],
+        "createdAt": "2026-11-25T00:34:41.868Z",
+        "reason": "Claude: the party cake is a deliberate flat composition built from the logo's own pieces (arcs, leaves, rings) because the client has no party photos; Ruva Web Pro 3.2 step 5 prescribes this, and user declined stock (Pixabay blocked)"
+      },
+      {
+        "rule": "overused-font",
+        "value": "montserrat",
+        "files": [
+          "propuesta-v2/presentacion.html"
+        ],
+        "createdAt": "2026-11-25T00:44:32.020Z",
+        "reason": "Claude: Montserrat is Studio Gloz's own brand body face (verified on studiogloz.com); user asked for the deck signed by Studio Gloz"
+      }
+    ]
+  }
+}

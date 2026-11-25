@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="es-CR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MagicArena · Propuesta de rediseño web</title>
+<link rel="icon" href="sitio/img/logo-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&family=Tenor+Sans&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#5F97A7;--mist:#8AB1C1;--sky:#C2DBE3;--sand:#F1D9B9;--ochre:#D9A063;--clay:#C1824A;
+  --ink:#23464F;--text:#3D3632;--muted:#6B625C;--clay-deep:#9A5D2E;
+  --cream:#FFFAF5;--linen:#F8EEE2;--line:#E9DCCB;--bad:#A8432F;--good:#2F6B4F;
+  --display:"Tenor Sans","Optima",sans-serif;--body:"Nunito Sans",system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--cream);color:var(--text);font:400 1.05rem/1.65 var(--body);-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block;height:auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;color:var(--ink);margin:0;text-wrap:balance}
+h2{font-size:clamp(2rem,4vw,3rem);line-height:1.1;margin-bottom:18px}
+h3{font-size:1.35rem;line-height:1.3}
+p{margin:0;text-wrap:pretty}
+a{color:var(--ink)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+.eyebrow{display:block;font:700 .76rem/1.2 var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--clay-deep);margin-bottom:16px}
+.lede{font-size:1.18rem;color:var(--muted);max-width:40em}
+section{padding:clamp(72px,9vw,120px) 0;border-top:1px solid var(--line)}
+.num{font-variant-numeric:tabular-nums}
+
+/* índice fijo */
+.toc{position:sticky;top:0;z-index:20;background:rgba(255,250,245,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.toc .wrap{display:flex;align-items:center;gap:22px;min-height:60px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.toc img{width:40px}
+.toc a{text-decoration:none;font-weight:600;font-size:.92rem;color:var(--ink);padding:6px 2px;border-bottom:2px solid transparent}
+.toc a:hover{border-color:var(--ochre)}
+.toc .cta{margin-left:auto;background:var(--clay-deep);color:#fff;padding:9px 18px;border-radius:999px;border:0}
+
+/* portada */
+.cover{padding:clamp(80px,12vw,150px) 0 clamp(70px,9vw,110px);border-top:0;position:relative;overflow:hidden}
+.cover-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;align-items:center}
+.cover h1{font-size:clamp(2.8rem,6.4vw,5.4rem);line-height:1.02;margin-bottom:26px}
+.cover .logo{width:min(100%,360px);justify-self:center}
+.meta{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;font-size:.92rem;color:var(--muted)}
+.meta b{display:block;color:var(--ink);font-weight:700}
+
+/* métricas */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.metric{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px}
+.metric .label{font-size:.82rem;color:var(--muted);font-weight:600;margin-bottom:10px;display:block}
+.metric .vals{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.metric s{color:var(--bad);font-size:1.05rem;text-decoration-thickness:1.5px}
+.metric b{font-family:var(--display);font-weight:400;font-size:2rem;color:var(--good);line-height:1}
+.metric small{display:block;margin-top:8px;font-size:.85rem;color:var(--muted)}
+
+/* bueno */
+.good-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.good{padding:24px;border-radius:18px;background:#fff;border:1px solid var(--line)}
+.good h3{font-size:1.15rem;margin-bottom:6px;display:flex;gap:10px;align-items:baseline}
+.good h3::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--good);flex:none;transform:translateY(-2px)}
+.good p{color:var(--muted);font-size:.97rem}
+
+/* hallazgos */
+.issues{display:grid;gap:22px;margin-top:44px}
+.issue{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(24px,4vw,48px);align-items:center;padding:clamp(22px,3vw,34px);background:#fff;border:1px solid var(--line);border-radius:24px}
+.issue.text-only{grid-template-columns:1fr}
+.issue figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:var(--linen)}
+.issue figcaption{font-size:.84rem;color:var(--muted);padding:10px 14px;background:#fff;border-top:1px solid var(--line)}
+.sev{display:inline-flex;gap:8px;align-items:center;font-size:.74rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.sev.alta{background:#F7DDD5;color:#7E2E1E}
+.sev.media{background:#F6E6CC;color:#6E4716}
+.sev.baja{background:#E1ECEF;color:#24505B}
+.issue h3{margin-bottom:10px;font-size:1.45rem}
+.issue p{color:var(--text);margin-bottom:10px}
+.issue ul{margin:8px 0 0;padding-left:20px;color:var(--muted);font-size:.97rem}
+.issue li{margin-bottom:4px}
+.fix{margin-top:14px;padding:14px 18px;background:#EEF5F0;border-radius:12px;font-size:.95rem;color:#24473A}
+.fix b{color:#1D3B30}
+.group-title{margin:64px 0 4px;font-family:var(--display);font-size:1.6rem;color:var(--ink);display:flex;align-items:center;gap:14px}
+.group-title::after{content:"";flex:1;height:1px;background:var(--line)}
+.group-title:first-of-type{margin-top:48px}
+
+/* marca */
+.brand-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(28px,5vw,64px);margin-top:44px;align-items:start}
+.logo-card{background:#fff;border:1px solid var(--line);border-radius:24px;padding:28px;text-align:center}
+.logo-card img{margin:0 auto 14px;width:78%}
+.logo-card p{font-size:.92rem;color:var(--muted)}
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.sw{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.sw i{display:block;height:88px}
+.sw div{padding:10px 12px 12px;font-size:.84rem;line-height:1.4}
+.sw b{display:block;color:var(--ink);font-size:.92rem}
+.sw code{font-size:.8rem;color:var(--muted)}
+.sub{font:700 .78rem/1 var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:30px 0 12px}
+.sub:first-child{margin-top:0}
+.type{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.type > div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px}
+.type .sample-d{font-family:var(--display);font-size:2.4rem;line-height:1.1;color:var(--ink);margin-bottom:8px}
+.type .sample-b{font-family:var(--body);font-size:1.6rem;line-height:1.2;color:var(--ink);font-weight:600;margin-bottom:8px}
+.type p{font-size:.9rem;color:var(--muted)}
+.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.principles div{background:var(--linen);border-radius:16px;padding:18px;font-size:.93rem}
+.principles b{display:block;font-family:var(--display);font-weight:400;font-size:1.12rem;color:var(--ink);margin-bottom:4px}
+
+/* comparativas */
+.compare{margin-top:44px}
+.slider{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:#fff;aspect-ratio:1440/900;user-select:none;touch-action:pan-y}
+.slider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
+.slider .after{clip-path:inset(0 0 0 var(--pos,50%))}
+.slider .handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;background:#fff;box-shadow:0 0 0 1px rgba(35,70,79,.25);transform:translateX(-50%);pointer-events:none}
+.slider .handle::after{content:"↔";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:1.1rem;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.slider input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.slider .tagb,.slider .taga{position:absolute;top:14px;padding:6px 12px;border-radius:999px;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+.slider .tagb{left:14px;background:#2B2622;color:#fff}
+.slider .taga{right:14px;background:var(--clay-deep);color:#fff}
+.hint{font-size:.88rem;color:var(--muted);margin-top:10px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,3vw,36px);margin-top:44px}
+.pair figure{margin:0}
+.pair .label{display:inline-block;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:12px}
+.label.b{background:#2B2622;color:#fff}.label.a{background:var(--clay-deep);color:#fff}
+.pair img{border-radius:16px;border:1px solid var(--line);background:#fff}
+.pair figcaption{margin-top:12px;font-size:.93rem;color:var(--muted)}
+.phones{display:flex;gap:clamp(16px,3vw,40px);justify-content:center;margin-top:44px;flex-wrap:wrap}
+.phone{width:280px;text-align:center}
+.phone .frame{border-radius:36px;padding:10px;background:#2B2622;box-shadow:0 30px 60px -30px rgba(0,0,0,.45)}
+.phone img{border-radius:28px;width:100%}
+.phone p{margin-top:14px;font-size:.92rem;color:var(--muted)}
+.lengths{display:flex;gap:clamp(24px,5vw,72px);justify-content:center;align-items:flex-start;margin-top:44px}
+.lengths figure{margin:0;text-align:center}
+.lengths .bar{width:120px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:0 auto}
+.lengths figcaption{margin-top:12px;font-size:.92rem;color:var(--muted)}
+.lengths figcaption b{display:block;font-family:var(--display);font-weight:400;font-size:1.5rem;color:var(--ink)}
+
+/* arquitectura */
+.arch-list{counter-reset:s;list-style:none;padding:0;margin:40px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:0 48px}
+.arch-list li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:10px;padding:18px 0;border-bottom:1px solid var(--line)}
+.arch-list li::before{content:counter(s,decimal-leading-zero);font-family:var(--display);color:var(--clay-deep);font-size:1.05rem;padding-top:2px}
+.arch-list b{display:block;color:var(--ink);font-weight:700}
+.arch-list span{color:var(--muted);font-size:.95rem}
+
+/* necesidades */
+.needs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:40px}
+.need{display:flex;gap:16px;padding:22px;background:#fff;border:1px solid var(--line);border-radius:18px}
+.need .ic{width:40px;height:40px;border-radius:50%;background:var(--linen);display:grid;place-items:center;flex:none;font-family:var(--display);color:var(--clay-deep)}
+.need b{display:block;color:var(--ink);margin-bottom:2px}
+.need span{color:var(--muted);font-size:.95rem}
+
+/* fases */
+.phases{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.phase{padding:26px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+.phase h3{margin-bottom:10px}
+.phase ul{margin:0;padding-left:18px;color:var(--muted);font-size:.95rem}
+.phase li{margin-bottom:6px}
+
+.closing{background:var(--ink);color:#DCE8EB;text-align:center;border-top:0}
+.closing h2{color:#fff}
+.closing p{max-width:36em;margin:0 auto 30px;color:#C9DADE}
+.btn{display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 28px;border-radius:999px;background:var(--cream);color:var(--ink);font-weight:700;text-decoration:none;transition:background-color .2s ease}
+.btn:hover{background:#fff}
+footer{padding:28px 0;font-size:.85rem;color:var(--muted);text-align:center}
+
+@media (max-width:900px){
+  .cover-grid,.brand-grid,.issue,.pair,.arch-list,.needs,.phases{grid-template-columns:1fr}
+  .metrics,.good-grid{grid-template-columns:1fr 1fr}
+  .swatches{grid-template-columns:repeat(2,1fr)}
+  .type,.principles{grid-template-columns:1fr}
+  .cover .logo{width:220px;justify-self:start;order:-1}
+}
+@media (max-width:560px){.metrics,.good-grid{grid-template-columns:1fr}.lengths .bar{width:90px}}
+@media print{.toc{display:none}section{break-inside:avoid-page}}
+</style>
+</head>
+<body>
+
+<nav class="toc" aria-label="Secciones de la propuesta">
+  <div class="wrap">
+    <img src="sitio/img/logo-mark.png" alt="" width="304" height="229">
+    <a href="#resumen">Resumen</a>
+    <a href="#bueno">Lo que funciona</a>
+    <a href="#malo">Lo que hay que corregir</a>
+    <a href="#marca">Sistema de marca</a>
+    <a href="#antes-despues">Antes y después</a>
+    <a href="#siguientes">Próximos pasos</a>
+    <a class="cta" href="sitio/index.html">Ver prototipo</a>
+  </div>
+</nav>
+
+<main>
+  <!-- PORTADA -->
+  <section class="cover" aria-labelledby="cover-title">
+    <div class="wrap cover-grid">
+      <div>
+        <h1 id="cover-title">Una web a la altura del lugar.</h1>
+        <p class="lede">Auditoría del sitio actual y propuesta visual construida con la identidad real de MagicArena: su logo, su paleta y su tipografía.</p>
+        <div class="meta">
+          <div><b>Sitio</b>magicarena.cr</div>
+          <div><b>Fecha</b>Noviembre 2026</div>
+          <div><b>Alcance</b>Página principal y menú</div>
+          <div><b>Entregables</b>Auditoría, sistema de marca y prototipo navegable</div>
+        </div>
+      </div>
+      <img class="logo" src="sitio/img/logo.png" alt="Logo de MagicArena Indoor Playground" width="452" height="470">
+    </div>
+  </section>
+
+  <!-- RESUMEN -->
+  <section id="resumen" aria-labelledby="sum-title">
+    <div class="wrap">
+      <span class="eyebrow">Resumen</span>
+      <h2 id="sum-title">El contenido es bueno. La forma no le hace justicia.</h2>
+      <p class="lede">MagicArena tiene un logo cuidado, una historia auténtica y un espacio real precioso. El sitio actual no usa nada de eso: la paleta, las fuentes y varias fotos no corresponden a la marca. En celular no hay menú y la página principal mide más de 37.000&nbsp;px de alto. La propuesta conserva todo el contenido valioso, lo ordena según lo que una familia necesita para decidir su visita y lo presenta con la identidad propia de la marca.</p>
+      <div class="metrics">
+        <div class="metric"><span class="label">Largo de la página en celular</span><div class="vals"><s class="num">37.346&nbsp;px</s><b class="num">12.326</b></div><small>67&nbsp;% menos scroll</small></div>
+        <div class="metric"><span class="label">Peso del HTML inicial</span><div class="vals"><s class="num">690&nbsp;KB</s><b class="num">48&nbsp;KB</b></div><small>Las fotos dejan de ir incrustadas en el código</small></div>
+        <div class="metric"><span class="label">Enlaces de navegación en celular</span><div class="vals"><s class="num">0</s><b class="num">6</b></div><small>Menú desplegable accesible</small></div>
+        <div class="metric"><span class="label">Fuentes de marca que cargan</span><div class="vals"><s class="num">0</s><b class="num">2</b></div><small>Tenor Sans y Nunito Sans</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUENO -->
+  <section id="bueno" aria-labelledby="good-title">
+    <div class="wrap">
+      <span class="eyebrow">Lo que funciona</span>
+      <h2 id="good-title">Lo que conservamos.</h2>
+      <p class="lede">Hay una base sólida. El rediseño parte de estas fortalezas en lugar de reemplazarlas.</p>
+      <div class="good-grid">
+        <div class="good"><h3>Un logo con carácter</h3><p>Arcoíris de trazo fino, hojas y una paleta terrosa coherente. Transmite calma y calidez, justo lo que promete el espacio.</p></div>
+        <div class="good"><h3>Una historia auténtica</h3><p>“Somos padres. Creamos el espacio que también queríamos encontrar.” Es el mensaje más poderoso del sitio y diferencia a MagicArena.</p></div>
+        <div class="good"><h3>Voz local y cercana</h3><p>El voseo y el trato cálido conectan con familias costarricenses. Lo mantenemos en todo el texto.</p></div>
+        <div class="good"><h3>WhatsApp con mensaje listo</h3><p>Cada botón abre WhatsApp con un mensaje precargado según el producto o servicio. Funciona muy bien en Costa Rica.</p></div>
+        <div class="good"><h3>Información útil</h3><p>Horario, ubicación, envíos con Correos, formas de pago, beneficios para colegios y programa social: todo existe, solo hay que ordenarlo.</p></div>
+        <div class="good"><h3>Fotos reales de producto</h3><p>Los productos de la tienda tienen fotos propias, precio y descuento. Se nota que son reales y eso genera confianza.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MALO -->
+  <section id="malo" aria-labelledby="bad-title">
+    <div class="wrap">
+      <span class="eyebrow">Lo que hay que corregir</span>
+      <h2 id="bad-title">Lo que hoy le resta a la marca.</h2>
+      <p class="lede">Ordenado por impacto en la decisión de una familia: confiar, entender y reservar.</p>
+
+      <h3 class="group-title">Identidad de marca</h3>
+      <div class="issues">
+        <article class="issue">
+          <div>
+            <span class="sev alta">Impacto alto</span>
+            <h3>El sitio no usa los colores del logo</h3>
+            <p>El logo es teal empolvado, celeste, arena y ocre. El sitio usa rojo-naranja, dos verdes, amarillo, rosado y un teal casi negro. Cada sección tiene un color de fondo distinto, y el resultado se parece más a una plantilla genérica que a MagicArena.</p>
+            <ul><li>Colores más usados en el sitio: <span class="num">#E85A3D</span>, <span class="num">#3F743F</span>, <span class="num">#218C59</span>, <span class="num">#102F32</span>. Ninguno aparece en el logo.</li></ul>
+            <p class="fix"><b>Propuesta:</b> una paleta de 6 colores tomada directamente del logo, con fondos crema y lino y un solo color de acción (terracota) para los botones.</p>
+          </div>
+          <figure><img src="capturas/antes-tarjetas-colores.png" alt="Sección de experiencias del sitio actual con tarjetas en salmón, verde, amarillo y celeste" loading="lazy"><figcaption>Sitio actual: cuatro colores en cuatro tarjetas consecutivas.</figcaption></figure>
+        </article>
+
+        <article class="issue">
+          <div>
+            <span class="sev alta">Impacto alto</span>
+            <h3>Las fuentes de la marca nunca cargan</h3>
+            <p>Los títulos usan Georgia, una fuente del sistema. El texto declara Nunito Sans, pero la fuente no se carga y cada equipo la reemplaza por Avenir o Arial. La frase “Pequeñas manos. Grandes historias.” está escrita en Comic Sans.</p>
+            <ul><li>Fuentes cargadas realmente: solo Inter (la del editor Framer), que además no se usa en el contenido.</li></ul>
+            <p class="fix"><b>Propuesta:</b> Tenor Sans (la sans humanista del “Indoor Playground” del logo) para títulos y Nunito Sans para el texto, ambas cargadas correctamente.</p>
+          </div>
+          <figure><img src="capturas/antes-secciones-colores.png" alt="Sección del sitio actual con título en Georgia y un diagrama decorativo de órbitas con las letras MA" loading="lazy"><figcaption>Títulos en Georgia y un adorno de órbitas con “MA” que no forma parte de la marca.</figcaption></figure>
+        </article>
+
+        <article class="issue">
+          <div>
+            <span class="sev alta">Impacto alto</span>
+            <h3>Dos identidades distintas en el mismo sitio</h3>
+            <p>La página del menú tiene otro logo (una “M” en un cuadrado), otro eslogan (“Juega · celebra · disfruta”), otra tipografía y otros colores. Para el visitante parece otro negocio.</p>
+            <p class="fix"><b>Propuesta:</b> un solo sistema visual para todas las páginas, con el mismo encabezado, la misma paleta y las mismas fuentes.</p>
+          </div>
+          <figure><img src="capturas/antes-menu.png" alt="Página de menú del sitio actual con un logo M cuadrado distinto al de la home" loading="lazy"><figcaption>/menu: otro logo, otra fuente y otra paleta.</figcaption></figure>
+        </article>
+
+        <article class="issue">
+          <div>
+            <span class="sev media">Impacto medio</span>
+            <h3>Señales de “hecho con IA y sin revisar”</h3>
+            <p>El sitio acumula adornos que no comunican nada: una cinta animada con “JUGAR ✦ IMAGINAR ✦ CREAR”, stickers girados, la órbita con “MA”, tarjetas numeradas 01–04, símbolos como ◌ ✦ ↗ ☆ usados como íconos y frases genéricas como “El juego abre un mundo de posibilidades”.</p>
+            <ul>
+              <li>Sobre la cabecera aparece una barra de la plantilla de Framer (“MagicArena® · Momentum Pinares”) y todo el sitio está dentro de un marco blanco.</li>
+              <li>La consola del navegador registra un error de React (#422) que, según Framer, puede causar parpadeos.</li>
+            </ul>
+            <p class="fix"><b>Propuesta:</b> eliminar la decoración que no aporta, escribir textos específicos del lugar (arena, Helado Café, calma) e íconos de trazo fino derivados del logo.</p>
+          </div>
+          <figure><img src="capturas/antes-mobile-hero.png" alt="Vista móvil del sitio actual con una barra duplicada de la plantilla sobre la cabecera" loading="lazy" style="max-height:520px;width:auto;margin:0 auto"><figcaption>Celular: barra sobrante de la plantilla arriba de la cabecera real.</figcaption></figure>
+        </article>
+      </div>
+
+      <h3 class="group-title">Confianza y contenido</h3>
+      <div class="issues">
+        <article class="issue">
+          <div>
+            <span class="sev alta">Impacto alto</span>
+            <h3>La foto principal es un flyer con un botón falso</h3>
+            <p>La imagen del hero es un afiche completo con logo, textos y un botón “Coordiná tu visita” dibujado. Al tocarlo no pasa nada. Además, el flyer dice “Lunes: Cerrado”, mientras el sitio dice “Lunes a jueves de 1:00 a 7:00 p.&nbsp;m.”.</p>
+            <p class="fix"><b>Propuesta:</b> usar la foto del arenero sola, con el botón de reserva real al lado. Hay que <b>confirmar el horario de los lunes</b> antes de publicar.</p>
+          </div>
+          <figure><img src="capturas/antes-flyer-hero.png" alt="Flyer usado como imagen principal, con textos y un botón dibujado" loading="lazy"><figcaption>Imagen original del hero: el botón es parte de la imagen.</figcaption></figure>
+        </article>
+
+        <article class="issue text-only">
+          <div>
+            <span class="sev alta">Impacto alto</span>
+            <h3>Fotos que no muestran el espacio real</h3>
+            <p>Las fotos de “Sobre nosotros” (familia en un arenero de madera) y de “Fiestas” (cumpleaños con resbaladero y plantas) muestran un lugar distinto al real, que tiene arena blanca y la cocinita Helado Café. Tienen la estética típica de imágenes generadas o de banco. Si una familia llega y no reconoce el lugar, la confianza se pierde.</p>
+            <p class="fix"><b>Propuesta:</b> el prototipo deja marcos reservados (“Foto real”) en lugar de esas imágenes. Recomendamos una sesión de fotos de medio día en el espacio, con familias reales y autorización de imagen.</p>
+          </div>
+        </article>
+
+        <article class="issue">
+          <div>
+            <span class="sev alta">Impacto alto</span>
+            <h3>Falta lo que más pregunta una familia</h3>
+            <p>No aparece el precio de la entrada, ni las edades recomendadas, la duración de la visita, las reglas (medias, acompañantes) o si hace falta reservar. Todo eso se resuelve hoy por WhatsApp, uno por uno.</p>
+            <ul><li>Black Friday aparece tres veces en la home y en 23 insignias de producto, pero el precio de la entrada no aparece ni una vez.</li></ul>
+            <p class="fix"><b>Propuesta:</b> un bloque “Tu visita” con horario, ubicación, tarifas y preguntas frecuentes, visible justo debajo del hero.</p>
+          </div>
+          <figure><img src="capturas/antes-tienda.png" alt="Grilla de productos del sitio actual con insignias de descuento" loading="lazy"><figcaption>23 productos ocupan más de 6.000&nbsp;px de la página principal.</figcaption></figure>
+        </article>
+
+        <article class="issue text-only">
+          <div>
+            <span class="sev media">Impacto medio</span>
+            <h3>Detalles que se notan</h3>
+            <ul>
+              <li>La lista de colegios Estudiante VIP tiene duplicados aparentes: “Saint Peter’s” y “Saint Peter”, “Saint Clare” y “Saint Clair”.</li>
+              <li>El teléfono 8676 1520 abre WhatsApp, no permite llamar.</li>
+              <li>El menú del café está publicado como imagen: Google no lo lee, los lectores de pantalla tampoco, y no se puede copiar ni traducir.</li>
+              <li>La navegación principal tiene 7 enlaces y 2 botones, y le da más peso a “Compras” que a “Reservar”, que es el negocio principal.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="group-title">Celular, rendimiento y buscadores</h3>
+      <div class="issues">
+        <article class="issue">
+          <div>
+            <span class="sev alta">Impacto alto</span>
+            <h3>En celular no hay menú</h3>
+            <p>En pantallas pequeñas los 7 enlaces de navegación se ocultan y no hay botón de menú. La página mide 37.346&nbsp;px (unas 44 pantallas), y el aviso de Black Friday ocupa toda la primera pantalla, así que la foto del lugar no se ve al entrar.</p>
+            <p class="fix"><b>Propuesta:</b> menú desplegable accesible, una barra de promoción delgada que se puede cerrar y una página principal un 67&nbsp;% más corta.</p>
+          </div>
+          <figure><img src="capturas/antes-mobile-hero.png" alt="Primera pantalla del sitio actual en celular, ocupada por el aviso de Black Friday" loading="lazy" style="max-height:520px;width:auto;margin:0 auto"><figcaption>Primera pantalla en un iPhone: no aparece ni la foto ni el menú.</figcaption></figure>
+        </article>
+
+        <article class="issue text-only">
+          <div>
+            <span class="sev media">Impacto medio</span>
+            <h3>Pesado y casi invisible para Google</h3>
+            <ul>
+              <li>18 de las 28 imágenes están incrustadas en el código (base64): el HTML pesa 690&nbsp;KB, el navegador no puede guardarlas en caché y la primera carga se hace más lenta.</li>
+              <li>La meta descripción dice solamente “MagicArena ”. El título de la página es “MagicArena”, sin “playground”, “Curridabat” ni “fiestas infantiles”.</li>
+              <li>No hay datos estructurados de negocio local (horario, dirección, teléfono), que ayudan a aparecer en Google Maps y en los resultados locales.</li>
+              <li>Los botones blancos sobre naranja (<span class="num">#E85A3D</span>) tienen un contraste de 3,5:1, por debajo del mínimo de accesibilidad (4,5:1).</li>
+            </ul>
+            <p class="fix"><b>Propuesta:</b> imágenes servidas como archivos optimizados, título y descripción con las búsquedas reales (“playground Curridabat”, “fiestas infantiles”), schema de negocio local y contraste AA en todos los botones.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARCA -->
+  <section id="marca" aria-labelledby="brand-title">
+    <div class="wrap">
+      <span class="eyebrow">Sistema de marca</span>
+      <h2 id="brand-title">Todo sale del logo.</h2>
+      <p class="lede">No inventamos una identidad nueva: extraímos los colores y la tipografía del logo existente y añadimos solo los tonos necesarios para que el texto sea legible.</p>
+      <div class="brand-grid">
+        <div class="logo-card">
+          <img src="sitio/img/logo.png" alt="Logo de MagicArena" width="452" height="470">
+          <p>El arcoíris de trazo fino inspira las formas del sitio: fotos en arco, íconos de línea y separadores curvos.</p>
+        </div>
+        <div>
+          <p class="sub">Paleta del logo</p>
+          <div class="swatches">
+            <div class="sw"><i style="background:#5F97A7"></i><div><b>Teal</b><code>#5F97A7</code><br>Íconos y detalles</div></div>
+            <div class="sw"><i style="background:#8AB1C1"></i><div><b>Bruma</b><code>#8AB1C1</code><br>Wordmark</div></div>
+            <div class="sw"><i style="background:#C2DBE3"></i><div><b>Cielo</b><code>#C2DBE3</code><br>Bloques suaves</div></div>
+            <div class="sw"><i style="background:#F1D9B9"></i><div><b>Arena</b><code>#F1D9B9</code><br>Fondos cálidos</div></div>
+            <div class="sw"><i style="background:#D9A063"></i><div><b>Ocre</b><code>#D9A063</code><br>Acentos</div></div>
+            <div class="sw"><i style="background:#C1824A"></i><div><b>Terracota</b><code>#C1824A</code><br>Hojas</div></div>
+            <div class="sw"><i style="background:#23464F"></i><div><b>Teal profundo</b><code>#23464F</code><br>Títulos · 7,9:1</div></div>
+            <div class="sw"><i style="background:#9A5D2E"></i><div><b>Terracota profunda</b><code>#9A5D2E</code><br>Botones · 5,2:1</div></div>
+          </div>
+          <p class="sub">Tipografía</p>
+          <div class="type">
+            <div><div class="sample-d">Jugar sin prisa</div><p><b>Tenor Sans</b> · títulos. Es la sans humanista del “Indoor Playground” del logo: elegante y serena.</p></div>
+            <div><div class="sample-b">Arena, calma y juego libre</div><p><b>Nunito Sans</b> · texto. Redondeada y muy legible. El sitio actual ya la declara, pero no la carga.</p></div>
+          </div>
+          <p class="sub">Principios</p>
+          <div class="principles">
+            <div><b>Calma</b>Fondos crema, mucho aire y un solo color de acción.</div>
+            <div><b>Verdad</b>Solo fotos reales del espacio, de los productos y de las familias.</div>
+            <div><b>Claridad</b>Horario, ubicación y reserva siempre a un toque.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANTES / DESPUÉS -->
+  <section id="antes-despues" aria-labelledby="ba-title">
+    <div class="wrap">
+      <span class="eyebrow">Antes y después</span>
+      <h2 id="ba-title">La misma marca, con otra cara.</h2>
+      <p class="lede">Deslizá el control para comparar la primera pantalla en computadora.</p>
+
+      <div class="compare">
+        <div class="slider" id="slider" style="--pos:50%">
+          <img src="capturas/antes-desktop-hero.png" alt="Antes: primera pantalla del sitio actual en computadora">
+          <img class="after" src="capturas/nuevo-desktop-hero.png" alt="Después: primera pantalla del rediseño en computadora">
+          <span class="tagb">Antes</span><span class="taga">Después</span>
+          <div class="handle" aria-hidden="true"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Comparar antes y después: mové a la izquierda para ver el rediseño">
+        </div>
+        <p class="hint">Izquierda: sitio actual. Derecha: propuesta.</p>
+      </div>
+
+      <div class="phones">
+        <div class="phone"><span class="label b" style="display:inline-block;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:12px;background:#2B2622;color:#fff">Antes</span><div class="frame"><img src="capturas/antes-mobile-hero.png" alt="Sitio actual en celular" loading="lazy"></div><p>Barra de plantilla duplicada, sin menú, y el aviso ocupa la pantalla.</p></div>
+        <div class="phone"><span class="label a" style="display:inline-block;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:12px;background:#9A5D2E;color:#fff">Después</span><div class="frame"><img src="capturas/nuevo-mobile-hero.png" alt="Rediseño en celular" loading="lazy"></div><p>Logo real, mensaje claro, reserva y estado “abierto ahora”.</p></div>
+        <div class="phone"><span class="label a" style="display:inline-block;font-size:.76rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:12px;background:#9A5D2E;color:#fff">Después · menú</span><div class="frame"><img src="capturas/nuevo-mobile-menu.png" alt="Menú desplegable del rediseño en celular" loading="lazy"></div><p>Seis destinos claros, accesibles con teclado y lector de pantalla.</p></div>
+      </div>
+
+      <div class="pair">
+        <figure>
+          <span class="label b">Antes · /menu</span>
+          <img src="capturas/antes-menu.png" alt="Página de menú actual con otra identidad visual" loading="lazy">
+          <figcaption>Otra marca: logo “M”, fuente Inter y paleta propia.</figcaption>
+        </figure>
+        <figure>
+          <span class="label a">Después · mismo sistema</span>
+          <img src="capturas/nuevo-desktop-hero.png" alt="Rediseño con identidad unificada" loading="lazy">
+          <figcaption>El menú, la tienda y cada página nueva comparten encabezado, colores y fuentes.</figcaption>
+        </figure>
+      </div>
+
+      <div class="lengths" aria-label="Comparación del largo de la página principal en computadora">
+        <figure><div class="bar"><img src="capturas/antes-desktop-largo.png" alt="Miniatura de la página actual completa" loading="lazy"></div><figcaption><b class="num">19.176&nbsp;px</b>Página actual</figcaption></figure>
+        <figure><div class="bar"><img src="capturas/nuevo-desktop-largo.png" alt="Miniatura del rediseño completo" loading="lazy"></div><figcaption><b class="num">8.440&nbsp;px</b>Propuesta</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARQUITECTURA -->
+  <section aria-labelledby="ia-title">
+    <div class="wrap">
+      <span class="eyebrow">Nueva estructura</span>
+      <h2 id="ia-title">El orden en que una familia decide.</h2>
+      <p class="lede">Primero, qué es y si puedo ir hoy. Después, qué vamos a encontrar y quién está detrás. Al final, todo lo demás.</p>
+      <ol class="arch-list">
+        <li><div><b>Hero con foto real</b><span>Mensaje, reserva por WhatsApp y estado “abierto ahora” calculado con la hora de Costa Rica.</span></div></li>
+        <li><div><b>Datos de la visita</b><span>Horario, ubicación y contacto en una franja, sin tener que buscarlos.</span></div></li>
+        <li><div><b>Experiencias</b><span>Arena sensorial, exploración libre, Helado Café y actividades de la semana.</span></div></li>
+        <li><div><b>Sobre nosotros</b><span>La historia de los fundadores y sus tres valores, con una foto real.</span></div></li>
+        <li><div><b>Fiestas y eventos</b><span>Tres tipos de celebración y un botón directo para cotizar.</span></div></li>
+        <li><div><b>Café</b><span>Un bloque breve que lleva al menú, ahora con la misma marca.</span></div></li>
+        <li><div><b>Tienda destacada</b><span>4 productos en la home; el catálogo completo pasa a su propia página.</span></div></li>
+        <li><div><b>Comunidad</b><span>Colegios, terapeutas, Estudiante VIP y programa social en un solo bloque.</span></div></li>
+        <li><div><b>Planeá tu visita</b><span>Horario del día resaltado, preguntas frecuentes, Maps y Waze.</span></div></li>
+        <li><div><b>Cierre y pie de página</b><span>Reservar o llamar, con enlaces ordenados por tema.</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SIGUIENTES -->
+  <section id="siguientes" aria-labelledby="next-title">
+    <div class="wrap">
+      <span class="eyebrow">Próximos pasos</span>
+      <h2 id="next-title">Lo que necesitamos de MagicArena.</h2>
+      <p class="lede">Para pasar del prototipo al sitio publicado necesitamos esta información, que hoy no está en la web o se contradice.</p>
+      <div class="needs">
+        <div class="need"><span class="ic">1</span><div><b>Confirmar el horario de los lunes</b><span>El flyer dice “cerrado” y el sitio dice “1:00 a 7:00 p.&nbsp;m.”.</span></div></div>
+        <div class="need"><span class="ic">2</span><div><b>Tarifas de entrada</b><span>Precio por niño, acompañantes, duración y descuentos vigentes.</span></div></div>
+        <div class="need"><span class="ic">3</span><div><b>Sesión de fotos real</b><span>Espacio, arenero, Helado Café, familias y una fiesta, con autorización de imagen.</span></div></div>
+        <div class="need"><span class="ic">4</span><div><b>Edades y reglas del espacio</b><span>Rango de edad, uso de medias y política para acompañantes.</span></div></div>
+        <div class="need"><span class="ic">5</span><div><b>Paquetes de fiesta</b><span>Qué incluye cada uno, capacidad y precio de referencia.</span></div></div>
+        <div class="need"><span class="ic">6</span><div><b>Archivos del logo</b><span>Versión vectorial (SVG o AI) y el nombre de la fuente manuscrita del wordmark.</span></div></div>
+      </div>
+      <div class="phases">
+        <div class="phase"><h3>Fase 1 · Home y menú</h3><ul><li>Implementar el diseño aprobado</li><li>Menú del café en texto, no en imagen</li><li>SEO local y datos estructurados</li></ul></div>
+        <div class="phase"><h3>Fase 2 · Tienda y fiestas</h3><ul><li>Catálogo completo con categorías</li><li>Página de fiestas con paquetes</li><li>Pedido por WhatsApp con carrito simple</li></ul></div>
+        <div class="phase"><h3>Fase 3 · Medir y mejorar</h3><ul><li>Analítica de clics a WhatsApp</li><li>Ajustes según las preguntas frecuentes reales</li><li>Calendario de actividades semanales</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="closing" aria-labelledby="close-title">
+    <div class="wrap">
+      <h2 id="close-title">Navegá la propuesta.</h2>
+      <p>El prototipo funciona en computadora y celular: menú, estado de horario en vivo, preguntas frecuentes y enlaces reales de WhatsApp.</p>
+      <a class="btn" href="sitio/index.html">Abrir el prototipo</a>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap">Propuesta de rediseño para MagicArena · Noviembre 2026 · Las fotos del prototipo son del sitio actual; los marcos “Foto real” se reemplazan tras la sesión fotográfica.</div></footer>
+
+<script>
+(() => {
+  const s = document.getElementById('slider');
+  const input = s.querySelector('input');
+  const set = (v) => s.style.setProperty('--pos', v + '%');
+  input.addEventListener('input', () => set(input.value));
+  set(input.value);
+})();
+</script>
+</body>
+</html>
